@@ -6,12 +6,11 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:33:29 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/10/26 17:30:23 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/10/28 18:26:45 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-#include <stdio.h>
 
 int	check_wall(char *line)
 {
@@ -24,7 +23,7 @@ int	check_wall(char *line)
 	return (1);
 }
 
-void	find_obj(t_game *game, char *line)
+void	find_obj(t_game *game, int y, char *line)
 {
 	int	i;
 
@@ -36,7 +35,11 @@ void	find_obj(t_game *game, char *line)
 		else if (line[i] == 'E')
 			game->exit_cnt += 1;
 		else if (line[i] == 'P')
+		{
+			game->y = y;
+			game->x = i;
 			game->start_cnt += 1;
+		}
 	}
 }
 
@@ -53,7 +56,7 @@ void	check_map(t_game *game)
 			print_error(game, "Not rectangle map!\n");
 		if ((game->map)[i][0] != '1' || (game->map)[i][game->width - 1] != '1')
 			print_error(game, "Not found wall!\n");
-		find_obj(game, (game->map)[i]);
+		find_obj(game, i, (game->map)[i]);
 	}
 	if (!game->item_cnt)
 		print_error(game, "Not found item!\n");

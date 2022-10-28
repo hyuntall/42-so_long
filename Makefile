@@ -6,7 +6,7 @@
 #    By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 19:49:49 by hyuncpar          #+#    #+#              #
-#    Updated: 2022/10/26 17:58:49 by hyuncpar         ###   ########.fr        #
+#    Updated: 2022/10/28 18:21:26 by hyuncpar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CC			= cc -g -fsanitize=address
 CFLAG		= -Wall -Werror -Wextra
 RM			= rm -f
 
-SRCS		= main.c read_map.c check_map.c print_error.c memory_free.c utils.c \
+SRCS		= main.c read_map.c check_map.c key_event.c print_error.c memory_free.c utils.c \
 				setting.c
 GNL_SRCS	= ./gnl/get_next_line.c ./gnl/get_next_line_utils.c
 MLX_DIR		= ./mlx/

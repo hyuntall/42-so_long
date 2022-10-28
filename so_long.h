@@ -6,17 +6,27 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:00:06 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/10/26 18:09:57 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/10/28 18:17:55 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include "./mlx/mlx.h"
 # include "./gnl/get_next_line.h"
+
+# define X_EVENT_KEY_PRESS		2
+# define X_EVENT_KEY_RELEASE	3
+
+# define KEY_ESC		53
+# define KEY_W			13
+# define KEY_A			0
+# define KEY_S			1
+# define KEY_D			2
 
 typedef struct s_game
 {
@@ -25,7 +35,13 @@ typedef struct s_game
 	int		item_cnt;
 	int		exit_cnt;
 	int		start_cnt;
+	int		img_width;
+	int		img_heigth;
+	void	*mlx;
+	void	*win;
 	char	**map;
+	int		x;
+	int		y;
 	void	*packman;
 	void	*cherry;
 	void	*wall;
@@ -40,8 +56,10 @@ void	print_error(t_game *game, char *message);
 
 void	memory_free(t_game *game);
 
-void	setting_img(t_game *game, void *mlx);
-void	overlay_img(t_game *game, void *mlx, void *win);
+void	setting_img(t_game *game);
+void	overlay_img(t_game *game);
+
+int		key_event(int keycode, t_game *game);
 
 char	**ft_split(char const *s, char c);
 #endif
