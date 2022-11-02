@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory_free.c                                      :+:      :+:    :+:   */
+/*   processing_move.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 17:01:26 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 20:43:38 by hyuncpar         ###   ########.fr       */
+/*   Created: 2022/11/02 15:19:46 by hyuncpar          #+#    #+#             */
+/*   Updated: 2022/11/02 20:40:19 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
-void	map_free(char **map)
+void	processing_move(t_game *game)
 {
-	int		i;
-
-	i = -1;
-	while (map[++i])
+	game->move_cnt += 1;
+	if (game->map[game->y][game->x] == 'C')
+		game->item_cnt--;
+	else if (game->map[game->y][game->x] == 'E')
 	{
-		free(map[i]);
-		map[i] = 0;
+		if (!game->item_cnt)
+			game->cleard = 1;
+		else
+			game->cleard = -1;
 	}
-	free(map);
-	map = 0;
-}
-
-void	memory_free(t_game *game)
-{
-	map_free(game->map);
-	mlx_destroy_image(game->mlx, game->cherry);
-	mlx_destroy_image(game->mlx, game->wall);
-	mlx_destroy_image(game->mlx, game->empty);
-	mlx_destroy_image(game->mlx, game->packman);
-	mlx_destroy_image(game->mlx, game->exit);
+	printf("%c %d item: %d\n", game->map[game->y][game->x], game->cleard, game->item_cnt);
+	game->map[game->y][game->x] = 'P';
+	game->sprite = 0;
 }

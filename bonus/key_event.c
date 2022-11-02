@@ -6,11 +6,11 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 18:17:06 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 20:19:31 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/02 20:39:58 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	move_up(t_game *game)
 {

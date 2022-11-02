@@ -6,11 +6,11 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:33:29 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 20:42:41 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/02 22:17:41 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	check_wall(char *line)
 {
@@ -39,6 +39,11 @@ void	find_obj(t_game *game, int y, char *line)
 			game->y = y;
 			game->x = i;
 			game->start_cnt += 1;
+		}
+		else if (line[i] == 'G')
+		{
+			add_enemy(game, y, i);
+			printf("!!\n");
 		}
 	}
 }

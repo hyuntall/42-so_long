@@ -6,11 +6,11 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:54:33 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/10/28 21:35:04 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/02 20:40:32 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 int	check_c(char str_c, char c)
 {

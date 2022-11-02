@@ -6,17 +6,20 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:49:16 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 20:43:19 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/02 20:40:28 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	setting_img(t_game *game)
 {
 	game->packman = \
 	mlx_xpm_file_to_image(game->mlx, \
 	"./img/man.xpm", &game->img_width, &game->img_heigth);
+	game->packman2 = \
+	mlx_xpm_file_to_image(game->mlx, \
+	"./img/man2.xpm", &game->img_width, &game->img_heigth);
 	game->cherry = \
 	mlx_xpm_file_to_image(game->mlx, \
 	"./img/cherry.xpm", &game->img_width, &game->img_heigth);
@@ -26,6 +29,9 @@ void	setting_img(t_game *game)
 	game->empty = \
 	mlx_xpm_file_to_image(game->mlx, \
 	"./img/empty.xpm", &game->img_width, &game->img_heigth);
+	game->ghost = \
+	mlx_xpm_file_to_image(game->mlx, \
+	"./img/ghost.xpm", &game->img_width, &game->img_heigth);
 	game->exit = \
 	mlx_xpm_file_to_image(game->mlx, \
 	"./img/exit.xpm", &game->img_width, &game->img_heigth);
@@ -43,11 +49,20 @@ void	put_img(t_game *game, int h, int w)
 		mlx_put_image_to_window(game->mlx, \
 		game->win, game->empty, w * 64, h * 64);
 	else if (game->map[h][w] == 'P')
-		mlx_put_image_to_window(game->mlx, \
-		game->win, game->packman, w * 64, h * 64);
+	{
+		if (game->sprite)
+			mlx_put_image_to_window(game->mlx, \
+			game->win, game->packman, w * 64, h * 64);
+		else
+			mlx_put_image_to_window(game->mlx, \
+			game->win, game->packman2, w * 64, h * 64);
+	}
 	else if (game->map[h][w] == 'E')
 		mlx_put_image_to_window(game->mlx, \
 		game->win, game->exit, w * 64, h * 64);
+	else if (game->map[h][w] == 'G')
+		mlx_put_image_to_window(game->mlx, \
+		game->win, game->ghost, w * 64, h * 64);
 }
 
 void	overlay_img(t_game *game)

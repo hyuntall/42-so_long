@@ -6,11 +6,11 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:01:26 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 20:43:38 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/02 20:40:03 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "so_long_bonus.h"
 
 void	map_free(char **map)
 {
@@ -33,5 +33,6 @@ void	memory_free(t_game *game)
 	mlx_destroy_image(game->mlx, game->wall);
 	mlx_destroy_image(game->mlx, game->empty);
 	mlx_destroy_image(game->mlx, game->packman);
+	mlx_destroy_image(game->mlx, game->packman2);
 	mlx_destroy_image(game->mlx, game->exit);
 }
