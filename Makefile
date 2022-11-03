@@ -6,14 +6,14 @@
 #    By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 19:49:49 by hyuncpar          #+#    #+#              #
-#    Updated: 2022/11/02 22:04:37 by hyuncpar         ###   ########.fr        #
+#    Updated: 2022/11/03 20:42:27 by hyuncpar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= so_long
 BNAME		= so_long_bonus
 
-CC			= cc -g -fsanitize=address
+CC			= cc
 CFLAG		= -Wall -Werror -Wextra
 RM			= rm -f
 
@@ -41,6 +41,8 @@ $(NAME) : $(OBJS)
 $(BNAME) : $(BOBJS)
 	make -C $(MLX_DIR)
 	$(CC) -o $(BNAME) $(BOBJS) -L $(MLX_DIR) -lmlx -framework OpenGL -framework Appkit
+
+all : $(NAME)
 
 bonus : $(BNAME)
 

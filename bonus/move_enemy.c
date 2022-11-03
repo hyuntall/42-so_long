@@ -6,7 +6,7 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 21:12:15 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 22:23:30 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/03 20:52:34 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@ void	up_enemy(t_game *game, t_list *enemy)
 {
 	if (game->map[enemy->x - 1][enemy->y] == '0')
 	{
+		game->map[enemy->x][enemy->y] = '0';
+		game->map[enemy->x - 1][enemy->y] = 'G';
+		enemy->x--;
+	}
+	else if (game->map[enemy->x - 1][enemy->y] == 'P')
+	{
+		game->cleard = -1;
 		game->map[enemy->x][enemy->y] = '0';
 		game->map[enemy->x - 1][enemy->y] = 'G';
 		enemy->x--;
@@ -32,6 +39,13 @@ void	down_enemy(t_game *game, t_list *enemy)
 		game->map[enemy->x + 1][enemy->y] = 'G';
 		enemy->x++;
 	}
+	else if (game->map[enemy->x + 1][enemy->y] == 'P')
+	{
+		game->cleard = -1;
+		game->map[enemy->x][enemy->y] = '0';
+		game->map[enemy->x + 1][enemy->y] = 'G';
+		enemy->x++;
+	}
 	else
 		enemy->pos++;
 }
@@ -40,6 +54,13 @@ void	left_enemy(t_game *game, t_list *enemy)
 {
 	if (game->map[enemy->x][enemy->y - 1] == '0')
 	{
+		game->map[enemy->x][enemy->y] = '0';
+		game->map[enemy->x][enemy->y - 1] = 'G';
+		enemy->y--;
+	}
+	else if (game->map[enemy->x][enemy->y - 1] == 'P')
+	{
+		game->cleard = -1;
 		game->map[enemy->x][enemy->y] = '0';
 		game->map[enemy->x][enemy->y - 1] = 'G';
 		enemy->y--;
@@ -56,21 +77,27 @@ void	right_enemy(t_game *game, t_list *enemy)
 		game->map[enemy->x][enemy->y + 1] = 'G';
 		enemy->y++;
 	}
+	else if (game->map[enemy->x][enemy->y + 1] == 'P')
+	{
+		game->cleard = -1;
+		game->map[enemy->x][enemy->y] = '0';
+		game->map[enemy->x][enemy->y + 1] = 'G';
+		enemy->y++;
+	}
 	else
 		enemy->pos++;
 }
 
 void	move_enemy(t_game *game, t_list *enemy)
 {
-	printf("pos: %d\n", enemy->pos);
-	printf("%d %d\n", enemy->x, enemy->y);
-	if (enemy->pos % 4 == 0)
+	if (enemy->pos == 0)
 		up_enemy(game, enemy);
-	else if (enemy->pos % 4 == 1)
+	else if (enemy->pos == 1)
 		down_enemy(game, enemy);
-	else if (enemy->pos % 4 == 2)
+	else if (enemy->pos == 2)
 		left_enemy(game, enemy);
-	else if (enemy->pos % 4 == 3)
+	else if (enemy->pos == 3)
 		right_enemy(game, enemy);
-	printf("%d %d\n-------\n", enemy->x, enemy->y);
+	if (enemy->pos > 3)
+		enemy->pos = 0;
 }

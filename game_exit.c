@@ -6,15 +6,15 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 22:07:06 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 16:16:23 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/03 21:18:08 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	game_exit(t_game *game)
+int	game_exit(t_game *game)
 {
 	memory_free(game);
-	system("leaks so_long");
 	exit(0);
+	return (0);
 }

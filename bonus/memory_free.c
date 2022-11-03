@@ -6,7 +6,7 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 17:01:26 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 20:40:03 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/03 19:29:02 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,25 @@ void	map_free(char **map)
 	map = 0;
 }
 
+void	enemy_free(t_game *game)
+{
+	t_list	*enemy;
+	t_list	*temp;
+
+	enemy = game->enemy_list;
+	while (enemy)
+	{
+		temp = enemy->next;
+		free(enemy);
+		enemy = temp;
+	}
+}
+
 void	memory_free(t_game *game)
 {
 	map_free(game->map);
+	if (game->enemy_list)
+		enemy_free(game);
 	mlx_destroy_image(game->mlx, game->cherry);
 	mlx_destroy_image(game->mlx, game->wall);
 	mlx_destroy_image(game->mlx, game->empty);

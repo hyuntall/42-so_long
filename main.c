@@ -6,7 +6,7 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 19:35:46 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 20:45:15 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/03 21:22:08 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,15 @@ void	init_game(t_game *game)
 
 int	game_start(t_game *game)
 {
-	int i = -1;
-	while (game->map[++i])
-		printf("%s\n", game->map[i]);
+	char	*move_cnt;
+
+	move_cnt = ft_itoa(game->move_cnt);
 	overlay_img(game);
-	mlx_string_put(game->mlx, game->win, 64, 64, 222, "MOVE COUNT: ");
-	mlx_string_put(game->mlx, game->win, 150, 64, 222, ft_itoa(game->move_cnt));
-	if (game->cleard > 0)
-		mlx_string_put(game->mlx, game->win, 64, 32, 222, "GAME CLEAR!");
+	mlx_string_put(game->mlx, game->win, 64, 64, 999999999, "MOVE COUNT: ");
+	mlx_string_put(game->mlx, game->win, 150, 64, 999999999, move_cnt);
+	if (game->cleard == GAME_CLEAR)
+		mlx_string_put(game->mlx, game->win, 64, 32, 999999999, "GAME CLEAR!");
+	free(move_cnt);
 	return (0);
 }
 
@@ -46,9 +47,11 @@ int	main(int argc, char **argv)
 	t_game	game;
 	void	*img;
 
-	if (argc != 2)
-		return (0);
 	init_game(&game);
+	if (argc != 2)
+		print_error(&game, "Please one parameter!\n");
+	if (!check_filename(argv[1]))
+		print_error(&game, "Unable filename!\n");
 	read_map(argv[1], &game);
 	check_map(&game);
 	game.mlx = mlx_init();
@@ -57,6 +60,7 @@ int	main(int argc, char **argv)
 	setting_img(&game);
 	overlay_img(&game);
 	mlx_hook(game.win, X_EVENT_KEY_RELEASE, 0, &key_event, &game);
+	mlx_hook(game.win, 17, 0, game_exit, &game);
 	mlx_loop_hook(game.mlx, game_start, &game);
 	mlx_loop(game.mlx);
 }

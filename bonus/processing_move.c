@@ -6,7 +6,7 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:19:46 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 20:40:19 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/03 20:54:47 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,14 @@ void	processing_move(t_game *game)
 	else if (game->map[game->y][game->x] == 'E')
 	{
 		if (!game->item_cnt)
-			game->cleard = 1;
+			game->cleard = GAME_CLEAR;
 		else
-			game->cleard = -1;
+			game->cleard = NOT_CLEARD;
 	}
-	printf("%c %d item: %d\n", game->map[game->y][game->x], game->cleard, game->item_cnt);
+	else if (game->map[game->y][game->x] == 'G')
+	{
+		game->cleard = GAME_OVER;
+		return ;
+	}
 	game->map[game->y][game->x] = 'P';
-	game->sprite = 0;
 }

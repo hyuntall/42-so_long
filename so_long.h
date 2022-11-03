@@ -6,7 +6,7 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:00:06 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 20:43:25 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/03 20:37:14 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # define KEY_A			0
 # define KEY_S			1
 # define KEY_D			2
+
+# define NORMAL			0
+# define NOT_CLEARD		-1
+# define GAME_CLEAR		1
 
 typedef struct s_game
 {
@@ -53,6 +57,7 @@ typedef struct s_game
 
 void	read_map(char *filename, t_game *game);
 
+int		check_filename(char *filename);
 void	check_map(t_game *game);
 
 void	print_error(t_game *game, char *message);
@@ -67,7 +72,7 @@ int		key_event(int keycode, t_game *game);
 
 void	processing_move(t_game *game);
 
-void	game_exit(t_game *game);
+int	game_exit(t_game *game);
 
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);

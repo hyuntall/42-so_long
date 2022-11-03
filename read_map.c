@@ -6,7 +6,7 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 14:59:55 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 20:53:10 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/03 20:24:10 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	read_map(char *filename, t_game *game)
 	char	*tmp;
 	char	*backup;
 
-	if (!check_filename(filename))
-		print_error(game, "unavilable filename!");
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		print_error(game, "unavailable file!");
+		print_error(game, "Unable file!\n");
 	line = get_next_line(fd);
+	if (!line)
+		print_error(game, "Empty file!\n");
 	game->width = ft_strlen(line) - 1;
 	backup = ft_strdup(line);
 	while (line)

@@ -6,7 +6,7 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 16:33:29 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 22:17:41 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/03 21:31:41 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ void	find_obj(t_game *game, int y, char *line)
 			game->start_cnt += 1;
 		}
 		else if (line[i] == 'G')
-		{
 			add_enemy(game, y, i);
-			printf("!!\n");
-		}
+		else if (line[i] == '0' || line[i] == '1')
+			;
+		else
+			print_error(game, "Unable component in map!!\n");
 	}
 }
 
@@ -65,8 +66,8 @@ void	check_map(t_game *game)
 	}
 	if (!game->item_cnt)
 		print_error(game, "Not found item!\n");
-	if (!game->start_cnt)
-		print_error(game, "Not found start point!\n");
-	if (!game->exit_cnt)
-		print_error(game, "Not found exit!\n");
+	if (game->start_cnt != 1)
+		print_error(game, "Not one start point!\n");
+	if (game->exit_cnt != 1)
+		print_error(game, "Not one exit!\n");
 }

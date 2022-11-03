@@ -6,14 +6,13 @@
 /*   By: hyuncpar <hyuncpar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/26 15:00:06 by hyuncpar          #+#    #+#             */
-/*   Updated: 2022/11/02 22:06:23 by hyuncpar         ###   ########.fr       */
+/*   Updated: 2022/11/03 20:38:08 by hyuncpar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_BONUS_H
 # define SO_LONG_BONUS_H
 
-# include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
 # include "../mlx/mlx.h"
@@ -27,6 +26,11 @@
 # define KEY_A			0
 # define KEY_S			1
 # define KEY_D			2
+
+# define NOT_CLEARD		-2
+# define GAME_OVER		-1
+# define GAME_CLEAR		1
+# define NORMAL			0
 
 typedef struct s_list
 {
@@ -62,11 +66,11 @@ typedef struct s_game
 	t_list	*last_emeny;
 	int		cleard;
 	int		sprite;
-	int		time;
 }	t_game;
 
 void	read_map(char *filename, t_game *game);
 
+int		check_filename(char *filename);
 void	check_map(t_game *game);
 
 void	print_error(t_game *game, char *message);
@@ -85,7 +89,7 @@ void	add_enemy(t_game *game, int x, int y);
 
 void	move_enemy(t_game *game, t_list *enemy);
 
-void	game_exit(t_game *game);
+int		game_exit(t_game *game);
 
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
